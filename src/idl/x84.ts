@@ -5,7 +5,7 @@
  * IDL can be found at `target/idl/x84.json`.
  */
 export type X84 = {
-  "address": "X84XHMKT7xvjgVUXFNQLZLSdCEEZu2wAPrAeP4M9Hhi",
+  "address": "X84XXXZsWXpanM5UzshMKZH4wUbeFNcxPWnFyTBgRP5",
   "metadata": {
     "name": "x84",
     "version": "0.1.0",

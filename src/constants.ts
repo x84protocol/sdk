@@ -1,11 +1,11 @@
 import { PublicKey } from "@solana/web3.js";
 
 export const X84_PROGRAM_ID = new PublicKey(
-  "X84XHMKT7xvjgVUXFNQLZLSdCEEZu2wAPrAeP4M9Hhi"
+  "X84XXXZsWXpanM5UzshMKZH4wUbeFNcxPWnFyTBgRP5",
 );
 
 export const MPL_CORE_PROGRAM_ID = new PublicKey(
-  "CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d"
+  "CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d",
 );
 
 /** PDA seed prefixes (must match on-chain constants). */
@@ -65,19 +65,21 @@ export interface NetworkConfig {
 export const NETWORKS: Record<string, NetworkConfig> = {
   devnet: {
     programId: X84_PROGRAM_ID,
-    collection: new PublicKey("6s1irFAQHoiK7VLwrUQEGpN5E1MrLoo5dZVWZCAwsDZS"),
+    collection: new PublicKey("DFrYCE6FKdEtXfA7MQrSq4VM4ivxyHZwUCuK7osApgxC"),
     feeTreasury: new PublicKey("8VF2ZAp9C1RKeV2XmKBnCQdbhGuNZaLZ1x7mTCSGsMH9"),
     tokenMint: new PublicKey("Gh9ZwEmdLJ8DscKNTkTqPbNwLNNBjuSzaG9Vp2KGtKJr"),
-    treasuryTokenAccount: new PublicKey("95zdnDqXimbSosFxEwAKamp2E5rKHp9N1rXmsU1Bn4v1"),
+    treasuryTokenAccount: new PublicKey(
+      "95zdnDqXimbSosFxEwAKamp2E5rKHp9N1rXmsU1Bn4v1",
+    ),
     facilitator: new PublicKey("7iRiHRnj1NofyEZVuj86Z4s5MJwVFZVR71XuAsLnwLYX"),
   },
   mainnet: {
     programId: X84_PROGRAM_ID,
-    collection: null,
-    feeTreasury: null,
-    tokenMint: null,
-    treasuryTokenAccount: null,
-    facilitator: null,
+    collection: new PublicKey("E87LABMxRxUP4VoXUEKdUy3DLNp6SE63srFEvQxnps6C"),
+    feeTreasury: new PublicKey("8VF2ZAp9C1RKeV2XmKBnCQdbhGuNZaLZ1x7mTCSGsMH9"),
+    tokenMint: new PublicKey("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"),
+    treasuryTokenAccount: new PublicKey("Gq89NqUYLqcEmqepc9WuXfUmFvSGc5kSHgUcbfGWHa5B"),
+    facilitator: new PublicKey("7iRiHRnj1NofyEZVuj86Z4s5MJwVFZVR71XuAsLnwLYX"),
   },
 };
 

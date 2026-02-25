@@ -18,6 +18,11 @@
       "import": "./dist/settlement.js",
       "require": "./dist/settlement.cjs"
     },
+    "./api": {
+      "types": "./dist/api.d.ts",
+      "import": "./dist/api.js",
+      "require": "./dist/api.cjs"
+    },
     "./idl": {
       "types": "./src/idl/x84.ts",
       "default": "./src/idl/x84.json"

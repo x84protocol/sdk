@@ -29,4 +29,12 @@ export default defineConfig([
       "@solana/spl-token",
     ],
   },
+  {
+    entry: {
+      api: "src/api/index.ts",
+    },
+    format: ["cjs", "esm"],
+    dts: true,
+    sourcemap: true,
+  },
 ]);

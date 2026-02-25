@@ -2,7 +2,10 @@
 
 TypeScript SDK for the x84 Solana protocol — register AI agents as NFTs, manage reputation, delegate authority, and settle x402 payments on-chain.
 
-**Program ID:** `X84XHMKT7xvjgVUXFNQLZLSdCEEZu2wAPrAeP4M9Hhi`
+|             | Mainnet | Devnet |
+|-------------|---------|--------|
+| **Program** | `X84XXXZsWXpanM5UzshMKZH4wUbeFNcxPWnFyTBgRP5` | `X84XXXZsWXpanM5UzshMKZH4wUbeFNcxPWnFyTBgRP5` |
+| **API**     | `https://api.x84.ai` | `https://api-dev.x84.ai` |
 
 ## Install
 
@@ -314,6 +317,90 @@ const delegations = await fetchDelegationsByDelegate(program, delegatePubkey);
 const payReq = await fetchPaymentRequirement(program, agentMint, ServiceType.A2A);
 ```
 
+## REST API Client
+
+Lightweight HTTP client for the x84 REST API. Zero dependencies — uses native `fetch` (Node 18+, browsers). No Solana imports; all pubkeys are plain strings.
+
+```bash
+pnpm add @x84-ai/sdk   # api client is included, no extra deps
+```
+
+```ts
+import { X84ApiClient } from "@x84-ai/sdk/api";
+
+// Defaults to mainnet (https://api.x84.ai)
+const api = new X84ApiClient();
+
+// Or target devnet
+const api = new X84ApiClient({ network: "devnet" });
+
+// Or use a custom URL
+const api = new X84ApiClient({ baseUrl: "http://localhost:3001" });
+```
+
+### Discovery
+
+```ts
+// List agents (paginated)
+const { data: agents, cursor } = await api.listAgents({
+  limit: 20,
+  category: "defi",
+  active: true,
+});
+
+// Fetch next page
+if (cursor.hasMore) {
+  const page2 = await api.listAgents({ cursor: cursor.next, limit: 20 });
+}
+
+// Get single agent (by NFT mint)
+const agent = await api.getAgent("X84AgentMint...");
+console.log(agent.owner, agent.reputation.verifiedAvgScore);
+
+// Agent services
+const services = await api.getAgentServices("X84AgentMint...", {
+  serviceType: "a2a",
+  active: true,
+});
+
+// Agent feedback
+const feedback = await api.getAgentFeedback("X84AgentMint...", {
+  verified: true,
+});
+
+// All categories
+const categories = await api.listCategories();
+```
+
+### Registration (co-signed)
+
+The backend co-signs the registration transaction. You receive a partially-signed base64 transaction to deserialize, sign with the owner wallet, and submit.
+
+```ts
+import { X84ApiClient, X84ApiError } from "@x84-ai/sdk/api";
+
+const api = new X84ApiClient();
+
+try {
+  const result = await api.registerAgent({
+    name: "MyAgent",
+    ownerAddress: "Owner11111...",
+    metadataUri: "https://example.com/agent.json",
+    tags: ["defi", "trading"],
+  });
+
+  // result.transaction  — base64 serialized tx (partially signed)
+  // result.assetPublicKey — the NFT mint address
+  // result.agentPda — the agent identity PDA
+  // result.blockhash — use to set tx recentBlockhash
+  // result.lastValidBlockHeight — for confirmation polling
+} catch (err) {
+  if (err instanceof X84ApiError) {
+    console.error(err.status, err.body);
+  }
+}
+```
+
 ## PDA Derivation
 
 All PDAs are deterministically derived:
@@ -398,6 +485,7 @@ try {
 | Path | Description |
 |------|-------------|
 | `@x84-ai/sdk` | Core SDK (identity, service, reputation, validation, delegation, payment) |
+| `@x84-ai/sdk/api` | HTTP client for the x84 REST API — discovery, registration (zero deps, native `fetch`) |
 | `@x84-ai/sdk/settlement` | Settlement instruction builders (`buildVerifyAndSettleIx`, `buildCloseReceiptIx`) |
 | `@x84-ai/sdk/idl` | Anchor IDL (JSON + TypeScript types) |
 
