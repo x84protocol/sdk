@@ -78,7 +78,9 @@ export const NETWORKS: Record<string, NetworkConfig> = {
     collection: new PublicKey("E87LABMxRxUP4VoXUEKdUy3DLNp6SE63srFEvQxnps6C"),
     feeTreasury: new PublicKey("8VF2ZAp9C1RKeV2XmKBnCQdbhGuNZaLZ1x7mTCSGsMH9"),
     tokenMint: new PublicKey("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"),
-    treasuryTokenAccount: new PublicKey("Gq89NqUYLqcEmqepc9WuXfUmFvSGc5kSHgUcbfGWHa5B"),
+    treasuryTokenAccount: new PublicKey(
+      "Gq89NqUYLqcEmqepc9WuXfUmFvSGc5kSHgUcbfGWHa5B",
+    ),
     facilitator: new PublicKey("7iRiHRnj1NofyEZVuj86Z4s5MJwVFZVR71XuAsLnwLYX"),
   },
 };

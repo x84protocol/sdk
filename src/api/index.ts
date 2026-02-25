@@ -92,7 +92,7 @@ export class X84ApiClient {
   }
 
   async listCategories(): Promise<Category[]> {
-    return this.request<Category[]>("GET", "/categories");
+    return this.request<Category[]>("GET", "/agents/categories");
   }
 
   // ── Registration (co-signed by backend) ──

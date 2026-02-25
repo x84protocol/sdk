@@ -1,6 +1,6 @@
 {
   "name": "@x84-ai/sdk",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "TypeScript SDK for the x84 Solana protocol — AI agent identity, reputation, delegation, and payment settlement",
   "license": "MIT",
   "type": "module",
